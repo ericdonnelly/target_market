@@ -183,6 +183,14 @@
             .size([w, h])
             .on("tick", tick)
                 .start();
+
+          /* const nodeLabels = node.append("svg:text")
+            .attr({
+             "class": "node-label",
+              'dy': 24,
+              "text-anchor": "middle"
+               })
+              .text(d => d.hero); */
          
            var path = vis.selectAll("path.link")
               .data(links, function(d) { return d.target.id; });
@@ -442,6 +450,9 @@
       <div class="col-md-6"><center>
         <img alt="Model Accuracy" src="images/modelaccuracy.png" width="475"><br>
         <img alt="Loss" src="images/loss.png" width="400"></center>
+        /* <h3>Brick</h3>
+        <h3>Siding</h3>
+        <h3>Unknown</h3> */
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@
  "children": [
   {
    "name": "Brick",
+   "img": "images/bricktransparent.png",
    "children": [
     {
       "hero": "Brick",
@@ -71,54 +72,55 @@
   ]
   },
   {
-   "name": "Not Brick",
+   "name": "Siding",
+   "img": "images/sidingtransparent.png",
    "children": [
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_9846.jpg",
       "size": 40000
     },
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_9248.jpg",
       "size": 40000
     },
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_9580.jpg",
       "size": 40000
     },
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_8881.jpg",
       "size": 40000
     },
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_4963.jpg",
       "size": 40000
     },
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_4299.jpg",
       "size": 40000
     },
     {
-      "hero": "Not Brick",
-      "name": "Not Brick", 
-      "link": "Not Brick",
+      "hero": "Siding",
+      "name": "Siding", 
+      "link": "Siding",
       "img":  "images/20_190.jpg",
       "size": 40000
     }
@@ -126,6 +128,7 @@
   },
   {
    "name": "Unknown",
+   "img": "images/unknowntransparent.png",
    "children": [
     {
       "hero": "Unknown",
