@@ -49,22 +49,22 @@ model.load_weights('static/model/final_model.hdf5')
 
 
 COUNT = 0
+FORM_COUNT = 0
+ln = ''
+
 app = Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 1
 
 @app.route('/')
-def man():
+def main():
     return render_template('index.html')
-
-###########upload images page###########
-@app.route('/uploadImage')
-def uploadImage():
-    return render_template('uploadImage.html')
 
 
 ###########address form###########
 @app.route("/form", methods=["GET", "POST"])
 def form():
+    global ln
+    global FORM_COUNT
 
     if request.method == "POST":
         #API CALL FOR USER ADDRESS SUBMIT IN FORM
@@ -112,7 +112,7 @@ def form():
 
                 
             ln = address_choice.replace(" " , "+")
-
+            # ln = FORM_COUNT + ln
             # creates the url that will be passed to the url reader, this creates the full, valid, url that will return a google streetview image for each address in the address text file
             URL = pre+ln+suf
             #     print("URL FOR STREETVIEW IMAGE:\n"+URL)
@@ -122,28 +122,44 @@ def form():
             #you can run this up to this line in the python command line to see what each step does
             #final step, fetches and saves the streetview image for each address using the url created in the previous steps
             urllib.request.urlretrieve(URL, filename)
-
-            time.sleep(1)
-    
-    # add_image = plt.imread(f'static/images/address_submit/{ln}.jpg')
-    # add_resized_image = resize(add_image, (400,400,3))
-    # preds = model.predict(np.array([add_resized_image]))
-    # # COUNT += 1
             
-            # return redirect("/", code=302)
+            time.sleep(1)
+            os.rename(filename, f"static/images/address_submit/{FORM_COUNT}.jpg")
+            
+            # return redirect("/form", code=302)
+
         
+#     return render_template("form.html")
+
+# @app.route('/form_prediction', methods=['POST'])
+# def form_prediction():
     
-        
+    
+        image = plt.imread(f'static/images/address_submit/{FORM_COUNT}.jpg')
+        resized_image = resize(image, (400,400,3))
+        preds = model.predict(np.array([resized_image]))
+        FORM_COUNT += 1
+        # if data == None:
+        #     return render_template('form.html')
 
+        # else
 
+        return render_template('form.html', data=preds)
+    return render_template('form.html')
 
-        
-    return render_template("form.html")
-
-@app.route('/form')
+@app.route('/add_load_img')
 def add_load_img():
-    global COUNT
-    return send_from_directory(f"static/images/address_submit/{ln}.jpg")
+    global FORM_COUNT
+    return send_from_directory("static/images/address_submit/", f"{FORM_COUNT-1}.jpg")
+
+
+
+#**** DAVID'S BELOW THIS *****
+
+###########upload images page###########
+@app.route('/uploadImage')
+def uploadImage():
+    return render_template('uploadImage.html')
 
 @app.route('/prediction', methods=['POST'])
 def prediction():
@@ -163,6 +179,5 @@ def load_img():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 
