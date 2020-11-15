@@ -69,13 +69,17 @@ def form():
     if request.method == "POST":
         #API CALL FOR USER ADDRESS SUBMIT IN FORM
         input_address = []
+        # address_count = 0
 
         submit_address = request.form["address"]
         input_address.append(submit_address)
+        
 
         time.sleep(1)
 
         address = np.array(input_address)
+
+        # address_count += 1
 
         np.savetxt("static/data/user_address_submit.txt", address, fmt='%5s')
 
@@ -110,15 +114,14 @@ def form():
             # address_choice = [line.rstrip('\n') for line in open(text)]
             address_choice = text_file.readline().strip('\n')
 
-                
             ln = address_choice.replace(" " , "+")
-            # ln = FORM_COUNT + ln
+           
             # creates the url that will be passed to the url reader, this creates the full, valid, url that will return a google streetview image for each address in the address text file
             URL = pre+ln+suf
-            #     print("URL FOR STREETVIEW IMAGE:\n"+URL)
+            
                 #creates the filename needed to save each address's streetview image locally
             filename = os.path.join(dir, "_" + str(ln)+".jpg")
-            #     print("OUTPUT FILENAME:\n"+filename)
+           
             #you can run this up to this line in the python command line to see what each step does
             #final step, fetches and saves the streetview image for each address using the url created in the previous steps
             urllib.request.urlretrieve(URL, filename)
@@ -126,26 +129,27 @@ def form():
             time.sleep(1)
             os.rename(filename, f"static/images/address_submit/{FORM_COUNT}.jpg")
             
-            # return redirect("/form", code=302)
-
-        
-#     return render_template("form.html")
-
-# @app.route('/form_prediction', methods=['POST'])
-# def form_prediction():
-    
-    
+        # RUN PREDICTION ON ADDRESS FORM SUBMIT  
         image = plt.imread(f'static/images/address_submit/{FORM_COUNT}.jpg')
         resized_image = resize(image, (400,400,3))
-        preds = model.predict(np.array([resized_image]))
+        # preds = model.predict(np.array([resized_image]))
+        data = {}
+        predictions = model.predict(np.array([resized_image]))[0]
+        predictions = list(predictions)
+        
+        best_guess_index = predictions.index(max(predictions))
+        classifications = {0: 'Brick', 1: 'Siding', 2: 'Unknown'}
+        best_guess_category = classifications[best_guess_index]
+        data['Best_guess'] = f'The classification of this property type is: {best_guess_category}.'
+        for i, prediction in enumerate(predictions):
+            data[classifications[i]] = f'{classifications[i]}: {round(100*prediction,0)}%'
+        print(data)
+
         FORM_COUNT += 1
-        # if data == None:
-        #     return render_template('form.html')
-
-        # else
-
-        return render_template('form.html', data=preds)
-    return render_template('form.html')
+       
+        return render_template('form.html', data=data)
+    data = {'Best_guess': '', 'Brick': '', 'Siding': '', 'Unknown': ''}
+    return render_template('form.html', data=data)
 
 @app.route('/add_load_img')
 def add_load_img():
