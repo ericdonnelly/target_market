@@ -66,26 +66,17 @@ def form():
     global ln
     global FORM_COUNT
 
+    # THIS FUNCTION RETURNS ADDRESS TXT FILE LENGTH
+    def file_len(fname):
+        with open(fname) as f:
+            i = -1
+            for i in enumerate(f):
+                pass
+        return i + 1
+
     if request.method == "POST":
         #API CALL FOR USER ADDRESS SUBMIT IN FORM
-        input_address = []
-        # address_count = 0
 
-        submit_address = request.form["address"]
-        input_address.append(submit_address)
-        
-
-        time.sleep(1)
-
-        address = np.array(input_address)
-
-        # address_count += 1
-
-        np.savetxt("static/data/user_address_submit.txt", address, fmt='%5s')
-
-        time.sleep(1)
-
-        
         #this is the first part of the streetview, url up to the address, this url will return a 600x600px image
         #pre="https://maps.googleapis.com/maps/api/streetview?size=600x600&amp;location="
         pre="https://maps.googleapis.com/maps/api/streetview?size=600x600&location="
@@ -100,9 +91,41 @@ def form():
         #this is the directory that will store the streetview images
         #this directory will be created if not present
         #_________________________________________
-        #**** DAVE, WHAT DIRECTORY SHOULD THE IMAGE GO SO IT CAN GET THE PREDICT FUNCTION? ***
         dir=r"static/images/address_submit/"
         #_________________________________________
+
+        
+        # READ IN TEXT FILE TO CHECK LENGTH
+        textfile_len = file_len("static/data/user_address_submit.txt")
+
+        #***---------------------ADDRESS FROM USER BELOW--------------***
+        # This stores the users submitted address before it is saved to a text file
+        input_address = []
+        
+        # User address from site
+        user_address = request.form["address"] 
+        # Strip out and store address index number from user submitted address
+        address_num = user_address.split(' ')
+        add_num_int = int(address_num) 
+        address_index = add_num_int + 0 + textfile_len
+
+        submit_address = str(address_index) + ' ' + user_address
+
+
+        input_address.append(submit_address)
+
+
+        time.sleep(1)
+
+        address = np.array(input_address)
+
+        # address_count += 1
+
+        # np.savetxt("static/data/user_address_submit.txt", address, fmt='%5s')
+        np.savetxt("static/data/user_address_submit.txt", address, fmt='%d', newline=' ', delimiter=',')
+
+        time.sleep(1)
+
         
         #checks if the dir variable (output path) above exists and creates it if it does not
         if not os.path.exists(dir):
@@ -112,9 +135,18 @@ def form():
         with open(text,"r") as text_file:
             #the variable 'lines' below creates a list of each address line in the source 'text' file
             # address_choice = [line.rstrip('\n') for line in open(text)]
-            address_choice = text_file.readline().strip('\n')
+            
+            # address_choice = text_file.readline().strip('\n')
+            address_choice = ''
+            for num, line in enumerate(text_file, 1):
+                if address_index in line:
+                    num = str(num)
+                    address_choice = line.split(',')[3] + '' + num
+            
 
-            ln = address_choice.replace(" " , "+")
+            just_add = address_choice.lstrip(' ')
+
+            ln = just_add.replace(" " , "+")
            
             # creates the url that will be passed to the url reader, this creates the full, valid, url that will return a google streetview image for each address in the address text file
             URL = pre+ln+suf

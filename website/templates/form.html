@@ -30,24 +30,15 @@
             </div>
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
-                    <div><p><h1>Enter a residential address to return an image and ML prediction. 
-                    </h1></p>
+                    <div><p><h1>Enter a residential address to return an image and ML prediction. </h1></p>
                    </div>
                    <hr>
                     <form method="POST" action="/form" role="form", name="address">
                         <div class="form-group">
                             <label for="inputName">Address (please enter in the format given below)</label>
                             <input type="text" class="form-control" id="inputName" name="address" placeholder="2017 Grant St Evanston, Illinois 60201">
-                        <!-- </div>
-                        <div class="form-group">
-                            <label for="inputLat">Pet Location Lat</label>
-                            <input type="text" class="form-control" id="inputLat" name="petLat" placeholder="Lat">
+                            <input type="submit" value="submit" class="btn btn-default">
                         </div>
-                        <div class="form-group">
-                            <label for="inputLon">Pet Location Lon</label>
-                            <input type="text" class="form-control" id="inputLon" name="petLon" placeholder="Lon">
-                        </div> -->
-                        <input type="submit" value="submit" class="btn btn-default">
                     </form>
                 </div>
                 <div class="col-md-offset-2 col-md-8">
@@ -58,7 +49,6 @@
                     <div>
                         <div class='cont'>
                 
-                            <!-- {{data}} -->
                             </div>
                             <h2><span>{{ data.Best_guess }}</span> 
                                 <br>
