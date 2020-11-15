@@ -89,7 +89,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-5"><br><br><br><br><br><br><br><br>
+        <h2>Test accuracy: 78.0755%</h2>
       </div>
       <div class="col-md-7">
         <h3>
@@ -236,8 +237,8 @@
           var setEvents = images
                   // Append hero text
                   .on( 'click', function (d) {
-                      d3.select("h1").html(d.hero); 
-                      d3.select("h2").html(d.name); 
+                      /* d3.select("h1").html(d.hero); 
+                      d3.select("h2").html(d.name);  */
                       /* d3.select("h3").html ("Take me to " + "<a href='" + d.link + "' >"  + d.hero + " web page ⇢"+ "</a>" );  */
                    })
         
@@ -266,7 +267,7 @@
               .attr("x", x_browser)
               .attr("y", y_browser +15)
               .attr("fill", tcBlack)
-              .text(function(d) { return d.hero; });
+              .text(function(d) { return x; });
          
          
           // Exit any old nodes.
@@ -447,12 +448,9 @@
           Trainable parameters: 2,562,395<br>
           Non-trainable parameters: 0</p>
       </div>
-      <div class="col-md-6"><center>
-        <img alt="Model Accuracy" src="images/modelaccuracy.png" width="475"><br>
+      <div class="col-md-6"><center><br><br><br>
+        <img alt="Model Accuracy" src="images/modelaccuracy.png" width="475"><br><br><br>
         <img alt="Loss" src="images/loss.png" width="400"></center>
-        /* <h3>Brick</h3>
-        <h3>Siding</h3>
-        <h3>Unknown</h3> */
       </div>
     </div>
   </div>

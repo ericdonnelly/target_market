@@ -4,7 +4,7 @@
  "children": [
   {
    "name": "Brick",
-   "img": "images/bricktransparent.png",
+   "img": "images/bricktransparent2.png",
    "children": [
     {
       "hero": "Brick",
@@ -73,7 +73,7 @@
   },
   {
    "name": "Siding",
-   "img": "images/sidingtransparent.png",
+   "img": "images/sidingtransparent2.png",
    "children": [
     {
       "hero": "Siding",
@@ -128,7 +128,7 @@
   },
   {
    "name": "Unknown",
-   "img": "images/unknowntransparent.png",
+   "img": "images/unknowntransparent4.png",
    "children": [
     {
       "hero": "Unknown",
