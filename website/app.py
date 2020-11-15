@@ -40,35 +40,37 @@ COUNT = 0
 app = Flask(__name__)
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 1
 
+###########home page: model characteristics###########
 @app.route('/')
-def man():
+def main():
     return render_template('index.html')
 
-###########upload images page###########
+###########user-uploads-the-image page##########
 @app.route('/uploadImage')
 def uploadImage():
     return render_template('uploadImage.html')
 
-
-###########address form###########
-@app.route("/send", methods=["GET", "POST"])
-def send():
-    if request.method == "POST":
-        address = request.form["address"]
-        return redirect("/", code=302)
-    return render_template("form.html")
-
+###########prediction page##########
 @app.route('/prediction', methods=['POST'])
 def prediction():
     global COUNT
-    img = request.files['image']
-    img.save(f'static/{COUNT}.jpg')    
+    # img = request.files['image']
+    request.files['image'].save(f'static/{COUNT}.jpg')    
     image = plt.imread(f'static/{COUNT}.jpg')
     resized_image = resize(image, (400,400,3))
-    preds = model.predict(np.array([resized_image]))
+    data = {}
+    predictions = model.predict(np.array([resized_image]))[0]
+    predictions = list(predictions)
+    best_guess_index = predictions.index(max(predictions))
+    classifications = {0: 'Brick', 1: 'Siding', 2: 'Unknown'}
+    best_guess_category = classifications[best_guess_index]
+    data['Best_guess'] = f'The model has identified {best_guess_category}.'
+    for i, prediction in enumerate(predictions):
+        data[classifications[i]] = f'{classifications[i]}: {round(100*prediction,0)}%'
     COUNT += 1
-    return render_template('prediction.html', data=preds)
+    return render_template('prediction.html', data=data)
 
+###########displays image##########
 @app.route('/load_img')
 def load_img():
     global COUNT

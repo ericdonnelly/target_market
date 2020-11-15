@@ -1,0 +1,74 @@
+import os
+import tensorflow as tf
+from tensorflow.keras import layers
+from glob import glob
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+# creating paths to retrieve the data
+ROOT = "/mnt/d"       # external hard drive 
+FOLDER = "INTEL_images_classification"
+TRAIN = os.path.join(ROOT, FOLDER, 'seg_train/seg_train')
+TEST = os.path.join(ROOT, FOLDER, 'seg_test/seg_test')
+PRED  = os.path.join(ROOT, FOLDER, 'seg_pred/seg_pred')
+
+# augmentation on the train set
+data_gen = ImageDataGenerator(
+        rotation_range=40,
+        width_shift_range=0.2,
+        height_shift_range=0.2,
+        rescale=1./255,
+        shear_range=0.2,
+        zoom_range=0.2,
+        horizontal_flip=True,
+        fill_mode='nearest')
+
+# test set need to be rescaled
+test_gen = ImageDataGenerator(rescale=1./255)
+
+# create the tlows
+# train
+train_data_gen = data_gen.flow_from_directory(
+                                        
+                                        batch_size=100,           # number of images in each batch
+                                        directory=TRAIN,          # the source of your images
+                                        shuffle=True,             # the images will be shuffle
+                                        target_size=(150, 150),   # size (height, width) of your images
+                                        class_mode='categorical'  # categorical because the dataset contains more than 2 labels binary instead
+                                        )
+# test
+test_data_gen = test_gen.flow_from_directory(
+                                        batch_size=32,
+                                        directory=TEST,
+                                        shuffle=True,
+                                        target_size=(150, 150),
+                                        class_mode='categorical'
+                                        )
+# construct bigger CNN
+model = tf.keras.Sequential([
+  layers.Conv2D(128, (3,3), activation='relu', input_shape=(150, 150, 3)),
+  layers.MaxPooling2D(2,2),
+  layers.Dropout(0.5),
+  layers.Conv2D(256, (3,3), activation='relu'),
+  layers.MaxPooling2D(2,2),
+  layers.Dropout(0.3),
+  layers.Conv2D(128, (3,3), activation='relu'),
+  layers.MaxPooling2D(2,2),
+  layers.Flatten(),
+  layers.Dropout(0.5),  
+  layers.Dense(512, activation='relu'),
+  layers.Dense(6, activation='softmax')
+])
+# compilation of the model 
+model.compile(
+  optimizer='adam',
+  loss= 'categorical_crossentropy', # because the data is categorical binary_crossentropy instead
+  metrics=['accuracy'])
+
+# fit the model 
+es = tf.keras.callbacks.EarlyStopping(patience=3)
+history = model.fit(
+  train_data_gen,
+  steps_per_epoch=2000 // 32,
+  validation_data=test_data_gen, callbacks=[es], validation_steps=800 // 32,
+  epochs=50
+)

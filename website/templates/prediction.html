@@ -8,14 +8,15 @@
     <body>
         <center>
             <div class='cont'>
-                
-            {{data}}
-        </div>
-            <h1>acc<br> cat: <span>{{data}}</span> <br>dog: <span>{{data}}</span><br> </h1>
-            
-            <img src="{{url_for('load_img')}}" alt='img'>
-            <a href="/" class='btn'>go back</a>
 
+            <!-- {{data}} -->
+
+            <h2><span>{{ data.Best_guess }}</span> 
+                <br>
+                <br><span>{{ data.Brick }}</span>
+                <br><span>{{ data.Siding }}</span>
+                <br><span>{{ data.Unknown }}</span></h2>
+            </div>
         </center>
         
     </body>
