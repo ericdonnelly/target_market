@@ -14,7 +14,7 @@ import os
 import google_streetview.api
 import time
 import glob
-#import streetview
+import streetview
 import itertools
 from config import gkey
 from my_functions import address_form, image_form
@@ -51,7 +51,7 @@ model.load_weights('static/model/final_model.hdf5')
 
 COUNT = 0
 FORM_COUNT = 0
-IS_ADDRESS = True
+IS_ADDRESS = None
 ln = ''
 
 app = Flask(__name__)
@@ -73,6 +73,8 @@ def main():
             # return model predictions from user address input
             data, FORM_COUNT = address_form(model, submit_address, FORM_COUNT)
 
+            IS_ADDRESS = True
+
         else:
 
             request_files = request.files['image']
@@ -89,9 +91,14 @@ def main():
     return render_template('index.html', data=data)
 
 
-###########displays image from address input##########
-@app.route('/address_load_img')
-def address_load_img():
+###########displays image on website##########
+
+#Note: Default image when page loads is "example.jpg" in static/images/upload_images/.
+#If user uploads image onto website, image f"{COUNT-1}.jpg" is saved to, and then retrieved from, static/images/upload_images/ and is displayed on website along with model results.
+#If user types address, image f"{FORM_COUNT-1}.jpg" is saved to, and then retrieved from, static/images/address_submit/ and is displayed on website along with model results.
+
+@app.route('/load_image')
+def load_image():
     global FORM_COUNT
     global IS_ADDRESS
 
@@ -102,6 +109,10 @@ def address_load_img():
     elif IS_ADDRESS == False:
 
         return send_from_directory("static/images/upload_images/", f"{COUNT-1}.jpg")
+    
+    else:
+
+        return send_from_directory("static/images/upload_images/", "example.jpg")
 
 # ###########displays image from uploaded image##########
 # @app.route('/image_load_img')
