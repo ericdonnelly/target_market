@@ -1,11 +1,4 @@
-resources/brick_siding_combo_data/*
-resources/brick_siding_combo_data_copy
-resources/data_for_training_0*
-resources/data_for_training_01/*
-resources/data_for_training_02/*
-resources/data_for_training_03/*
-resources/data_for_training_04/*
-resources/data_for_training_05/*
+resources/*
 
 .DS_Store
 config.py
