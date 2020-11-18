@@ -24,16 +24,14 @@
 **Eric**
 * Clean website (e.g., buttons and such)
 * Clean up language on website (with help from all)
+* Link of pages and create model characteristics page
 
 **Dave**
 * Continue testing to see if site can be broken
-* Create on form on website to capture user classifications
-* Separate images into folders based on user classifications rather than model classifications
-* Find code that will update model based on the newly-uploaded images rather than create a whole new model
-* Create button to smarten algorithm?
+* Fix website
 
 **Model Development**
-* use 500 x 500 pictures?
+~~use 500 x 500 pictures~~
 * implement overfitting procedures?
 * gather more images?
 
@@ -43,3 +41,7 @@
 
 **Considerations**
 * Figure out how to store images in sql database?
+* Create on form on website to capture user classifications
+* Separate images into folders based on user classifications rather than model classifications
+* Find code that will update model based on the newly-uploaded images rather than create a whole new model
+* Create button to smarten algorithm?

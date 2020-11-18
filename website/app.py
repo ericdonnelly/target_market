@@ -122,24 +122,6 @@ def main():
         new_image_path_with_extension = new_image_path + '.jpg'
         # copy renamed image file to 'new_images' directory
         copyfile(image_upload_path, new_image_path_with_extension)
-
-        #####this code is part of the smartener and needs the 'image_database' subdirectory in the main directory to run correctly#######
-        # for category in os.listdir('new_images'):
-
-        #     if len(os.listdir('new_images/' + category)) >= 100:
-
-        #         # for each image category
-        #         for category in os.listdir('new_images'):
-                
-        #         # move files to corresponding directory in image database
-        #             for image in os.listdir('new_images/' + category):
-
-        #                 shutil.move(f'new_images/{category}/{image}', f'image_database/data_for_training_06/{category.lower()}_{code[category]}')
-
-        #         # run script to create new model
-        #         subprocess.run(['python', 'create_model.py'])
-                
-        #         break
                 
     else:
 
