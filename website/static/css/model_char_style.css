@@ -1,0 +1,29 @@
+#thumbwrap {
+    position: absolute;
+    top:-100; right: 200px;
+    /* padding: 10px; */
+    height: 100%;
+    width: 100%;
+	/* position:relative; */
+    /* margin:25px auto; */
+    transform: scale(.5);
+   
+	/* width:252px; height:252px; */
+}
+.thumb img { 
+	/* border:1px solid #000; */
+	/* margin:3px; */
+	float:left;
+}
+.thumb span { 
+    position:absolute;
+    visibility:hidden;
+   
+}
+.thumb:hover, .thumb:hover span { 
+	visibility:visible;
+	top:-2000; left:550px; 
+    z-index:1;
+    transform: scale(.6);
+}
+
