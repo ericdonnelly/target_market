@@ -70,7 +70,11 @@ def form():
     def file_len(fname):
         with open(fname) as f:
             i = -1
+<<<<<<< HEAD
+            for i, l in enumerate(f):
+=======
             for i in enumerate(f):
+>>>>>>> dc61acec591da2a6adfe6f42ba44f926a2a73c02
                 pass
         return i + 1
 
@@ -97,6 +101,10 @@ def form():
         
         # READ IN TEXT FILE TO CHECK LENGTH
         textfile_len = file_len("static/data/user_address_submit.txt")
+<<<<<<< HEAD
+        print(textfile_len)
+=======
+>>>>>>> dc61acec591da2a6adfe6f42ba44f926a2a73c02
 
         #***---------------------ADDRESS FROM USER BELOW--------------***
         # This stores the users submitted address before it is saved to a text file
@@ -105,11 +113,21 @@ def form():
         # User address from site
         user_address = request.form["address"] 
         # Strip out and store address index number from user submitted address
+<<<<<<< HEAD
+        address_num = user_address.split(' ')[0]
+        # add_num_int = int(address_num) 
+        address_index = address_num + "0" + str(textfile_len)
+        print(address_index)
+
+        submit_address = address_index + ' ' + user_address
+        print(address_index)
+=======
         address_num = user_address.split(' ')
         add_num_int = int(address_num) 
         address_index = add_num_int + 0 + textfile_len
 
         submit_address = str(address_index) + ' ' + user_address
+>>>>>>> dc61acec591da2a6adfe6f42ba44f926a2a73c02
 
 
         input_address.append(submit_address)
