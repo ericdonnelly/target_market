@@ -178,6 +178,13 @@ def load_image():
 
         return send_from_directory("static/images/upload_images/", "example.jpg")
 
+
+# model characteristics website
+@app.route('/model_characteristics')
+def model_characteristics():
+    return render_template('model_characteristics.html')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
