@@ -10,8 +10,8 @@ import urllib.request
 import os
 import google_streetview.api
 import glob
-import streetview
-import itertools
+# import streetview
+# import itertools
 from PIL import UnidentifiedImageError
 import shutil
 from shutil import copyfile
