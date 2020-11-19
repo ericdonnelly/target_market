@@ -5,34 +5,17 @@ from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, BatchN
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage.transform import resize
-#For API CALL ADDRESS SUBMIT
 import urllib.request
 import json
-# Import google_streetview for the api module
 import os
 import google_streetview.api
 import time
 import glob
-# import streetview
-# import itertools
 from config import gkey
-from sqlalchemy.ext.automap import automap_base
-from sqlalchemy.orm import Session
-from sqlalchemy import create_engine
 from datetime import datetime
 
-# # creating a SQL Alchemy ORM
-# engine = create_engine('sqlite:///database/database.sqlite')
-# Base = automap_base()
-# Base.prepare(engine, reflect=True)
-
-# uploaded_images = Base.class.images
-
-
-
-
 ### ADDRESS INPUT ###
-###########returns model predictions from user address input###########
+###########returns classifications from user address input###########
 def address_form(model, submit_address, ADDRESS_SUBMIT_COUNT):
 
     #API CALL FOR USER ADDRESS SUBMIT IN FORM
@@ -42,14 +25,9 @@ def address_form(model, submit_address, ADDRESS_SUBMIT_COUNT):
     # submit_address = request.form["address"]
     input_address.append(submit_address)
     
-    # time.sleep(1)
-
     address = np.array(input_address)
 
-    # example output: ['37061 Lakeshore Blvd Eastlake, OH 44095']
     np.savetxt("static/data/user_address_submit.txt", address, fmt='%5s')
-
-    # time.sleep(1)
 
     #this is the first part of the streetview, url up to the address, this url will return a 600x600px image
     pre="https://maps.googleapis.com/maps/api/streetview?size=600x600&location="
@@ -117,7 +95,7 @@ def address_form(model, submit_address, ADDRESS_SUBMIT_COUNT):
 
 
 ### IMAGE INPUT ###
-###########returns model predictions from user image upload###########
+###########returns model classifications from user image upload###########
 
 def image_form(model, image):
 
