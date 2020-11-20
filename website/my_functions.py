@@ -82,13 +82,15 @@ def address_form(model, submit_address, ADDRESS_SUBMIT_COUNT):
     classifications = {0: 'Brick', 1: 'Siding', 2: 'Unknown'}
     best_guess_category = classifications[best_guess_index]
 
+    data['Heading'] = 'THE CLASSIFICATION OF THIS PROPERTY IS:'
+
     if best_guess_value >= 0.5:
-        data['Best_guess'] = f'The classification of this property type is: {best_guess_category}.'
+        data['Best_guess'] = best_guess_category + '.'
     else:
-        data['Best_guess'] = 'The classification of this property type is: Unknown.'
+        data['Best_guess'] = 'Unknown.'
 
     for i, prediction in enumerate(predictions):
-        data[classifications[i]] = f'{classifications[i]}: {round(100*prediction,0)}%'
+        data[classifications[i]] = f'{classifications[i]}: {int(round(100*prediction,0))}%'
  
     return (data, predictions, best_guess_category, address)
 
@@ -108,12 +110,14 @@ def image_form(model, image):
     classifications = {0: 'Brick', 1: 'Siding', 2: 'Unknown'}
     best_guess_category = classifications[best_guess_index]
 
+    data['Heading'] = 'THE CLASSIFICATION OF THIS PROPERTY IS:'
+
     if best_guess_value >= 0.5:
-        data['Best_guess'] = f'The classification of this property type is: {best_guess_category}.'
+        data['Best_guess'] = best_guess_category + '.'
     else:
-        data['Best_guess'] = 'The classification of this property type is: Unknown.'
+        data['Best_guess'] = 'Unknown.'
 
     for i, prediction in enumerate(predictions):
-        data[classifications[i]] = f'{classifications[i]}: {round(100*prediction,0)}%'
+        data[classifications[i]] = f'{classifications[i]}: {int(round(100*prediction,0))}%'
 
     return (data, predictions, best_guess_category)
