@@ -2,7 +2,7 @@
 * python
 * Flask
 * keras
-* tensoflow
+* tensorflow
 * javascript
 * HTML
 * D3.js
