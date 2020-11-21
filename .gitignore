@@ -11,6 +11,8 @@ website/config.py
 .DS_Store
 config.py
 .ipynb_checkpoints
+cat viz.ipynb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
