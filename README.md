@@ -1,5 +1,5 @@
 # Target Marketing Machine Learning
-[Visit our group team site HERE!](https://brick-house-identifier.herokuapp.com/)
+[Visit our 'brickhouse' site HERE!](https://brick-house-identifier.herokuapp.com/)
 ---
 ![brick_house_final_00.png](images/brick_house_final_00.png)
 ---
