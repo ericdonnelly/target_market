@@ -1,5 +1,22 @@
 # Target Marketing Machine Learning
+* python
+* Flask
+* keras
+* tensoflow
+* javascript
+* HTML
+* D3.js
+
+---
+
 [Visit our 'brickhouse' site HERE!](https://brick-house-identifier.herokuapp.com/)
+---
+## Visit each branch to see the corresponding team member's code and project work.
+
+---
+
+## Final site deployment is routed through David Fried's github repo
+[deployment repo](https://github.com/david-fried/Brick-House-Identifier)
 ---
 ![brick_house_final_00.png](images/brick_house_final_00.png)
 ---
