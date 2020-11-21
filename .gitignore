@@ -12,7 +12,8 @@ website/config.py
 config.py
 .ipynb_checkpoints
 cat viz.ipynb
-__MACOSX/data_for_training_06
+__MACOSX/*
+TO_DO.md
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
